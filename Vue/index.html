@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习目录</title>
+    <script src="lib/vue.min.js"></script>
+</head>
+<body>
+<div id="vueSite">
+    <h1>Vue</h1>
+    <p>
+        Vue.js 使用了基于 HTML 的模版语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据。<br>
+        Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统。<br>
+        结合响应系统，在应用状态改变时， Vue 能够智能地计算出重新渲染组件的最小代价并应用到 DOM 操作上。
+    </p>
+    <h1>参考</h1>
+    <div v-for="ref in refs"><a v-bind:href="ref.url" target="_blank">{{ref.name}}</a></div>
+    <h1>目录</h1>
+    <ol>
+        <li v-for="module in modules">
+            <!-- 这里不能直接使用 href="{{module.tag}}" -->
+            <a v-bind:href="module.tag" target="_blank">{{module.name}}</a>
+        </li>
+    </ol>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: '#vueSite',
+        data: {
+            modules: [
+                {
+                    tag: 'page/start.html', name: '起步'
+                },
+                {tag: 'page/template.html', name: '模板语法'},
+                {tag: 'page/bind.html', name: '绑定指令'},
+                {tag: 'page/model.html', name: '模型指令'},
+                {tag: 'page/event.html', name: '事件模型'},
+                {tag: 'page/ajax.html', name: 'Vue-Ajax'},
+                {tag: 'page/component.html', name: '组件及其自定义'},
+                {tag: 'page/router.html', name: '路由'},
+            ],
+            refs: [{url: 'http://www.runoob.com/vue2/vue-tutorial.html', name: '菜鸟教程'},
+                {url: 'https://cn.vuejs.org/v2/guide/', name: 'vuejs'}],
+        }
+    })
+
+</script>
+</body>
+</html>

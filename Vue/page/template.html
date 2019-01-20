@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>模板语言</title>
+    <title>模板语法</title>
     <script src="../lib/vue.min.js"></script>
 </head>
 <body>
 <div id="v-render">
+    <span><h1>指令是带有 v- 前缀的特殊属性。</h1></span>
     <!-- 数据渲染：{{}}、v-html、v-text -->
-    <span><h1>{{renderTitle}}</h1></span>
+    <span><h2>{{renderTitle}}</h2></span>
     <span v-html="plainText"></span>
     <span v-html="htmlText"></span>
     <span v-text="textText"><h3>df</h3></span>
@@ -19,14 +20,14 @@
         data: {
             renderTitle: '1、数据渲染：{{}}、v-html、v-text',
             plainText: '<h3>1.1 {{}}：直接输出属性绑定的值</h3>',
-            htmlText: '<h3>1.2 v-html：将属性绑定的数据以html格式输出</h3>',
+            htmlText: '<h3>1.2 v-html：输出html代码</h3>',
             textText: '1.3 v-text：直接把节点内的文本替换为数据定义中的文本'
         }
     });
 </script>
 <div id="v-control">
     <!-- 逻辑控制：v-if/v-else-if/v-else、v-show -->
-    <span><h1>{{controlTitle}}</h1></span>
+    <span><h2>{{controlTitle}}</h2></span>
     <span v-html="controlIf"> </span>
     <template v-if="ifOk()">
         <p>用vue中定义的属性值给v-if做判断</p>
@@ -43,8 +44,8 @@
         el: '#v-control',
         data: {
             controlTitle: '2、逻辑控制：v-if/v-else-if/v-else、v-show',
-            controlIf: '<h3>2.1 v-if：如果v-if返回false，则控制的节点不插入dom中</h3>',
-            controlShow: '<h3>2.2 v-show：如果v-show返回false，则控制的节点隐藏</h3>',
+            controlIf: '<h3>2.1 v-if：如果v-if返回false，则指令所控制的节点不插入dom中</h3>',
+            controlShow: '<h3>2.2 v-show：如果v-show返回false，则指令所控制的节点隐藏</h3>',
             ifOk: function () {
                 return Math.random() > 0.5;
             },
@@ -57,7 +58,7 @@
 </script>
 <div id="v-for">
     <!-- 循环：v-for -->
-    <span><h1>{{forTitle}}</h1></span>
+    <span><h2>{{forTitle}}</h2></span>
     <span v-html="forInArray"></span>
     <ol>
         <li v-for="item in goodsList">
@@ -86,10 +87,11 @@
                 {id: 5, name: 'TTE', count: 15}
             ],
             specialGoods: {id: 10, name: '特殊商品', count: 100, opgCode: 'G88888'},
-            forTitle: '3、循环指令v-for，需使用for-in的方式进行循环',
+            forTitle: '3、循环指令v-for，需使用for-in的方式进行循环。控制指令所在节点重复N次',
             forInArray: '<h3>3.1 for-in  数组，item为每次迭代的元素</h3>',
-            forInObject: '<h3>3.2 for-in  对象，item可以是每次迭代的值；也可以是(value, key)，还可以(value, key,index)' +
-                '<br>型如： v-for="(value,key) in specialGoods"' +
+            forInObject: '<h3>3.2 for-in  对象，item可以是每次迭代的值；也可以是(value, key)，还可以(value, key,index)。型如： ' +
+                '<br>v-for="(value,key) in specialGoods"，则使用{{value}}或{{key}}来取值' +
+                '<br> v-for="item in goodsList"，则使用{{item.property}}来取值' +
                 '</h3>'
         }
     })

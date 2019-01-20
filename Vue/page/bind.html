@@ -3,8 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>v-bind指令</title>
+    <script src="../lib/vue.min.js"></script>
 </head>
 <body>
-
+<div id="bindId">
+    <span><h1>v-bind指令用来绑定DOM属性和数据，以便响应地更新HTML属性</h1></span>
+    <p>常见绑定HTML元素的属性，如href、id、class、style等属性</p>
+    <p>用法：v-bing后面加冒号，再加上HTML的属性，表示为该属性绑定vue数据</p>
+    <p>下面举几个例子（请F12查看页面结构）：</p>
+    <span v-html="idParam"></span>
+    <div v-for="id in ids" v-bind:id="'div_'+id">id：{{id}}</div>
+    <span v-html="nameParam"></span>
+    <div v-for="id in ids" v-bind:name="'div_'+id">name：div_{{id}}</div>
+    <span v-html="hrefParam"></span>
+    <div v-for="url in urls">
+        <a v-bind:href="url">&lt;a/&gt;的href是：{{url}}</a>
+    </div>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: '#bindId',
+        data: {
+            idParam: '<h2>v-bind:id</h2>',
+            nameParam: '<h2>v-bind:name</h2>',
+            classParam: '<h2>v-bind:class</h2>',
+            hrefParam: '<h2>v-bind:href</h2>',
+            ids: [1, 3, 2, 5, 10, 22],
+            urls: ['start.html', 'template.html', 'ajax.html'],
+        }
+    });
+</script>
 </body>
 </html>
