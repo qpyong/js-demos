@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue起步</title>
+    <script src="../lib/vue.min.js"></script>
+</head>
+<body>
+<div id="startId">
+    <ol>
+        <li>site: {{site }}</li>
+        <li>name: {{name}}</li>
+        <li>develop: {{develop}}</li>
+    </ol>
+    <ol>
+        <span>{{desc()}}</span>
+    </ol>
+    <span>{{log()}}</span>
+</div>
+<script type="text/javascript">
+    /**
+     * 当一个 Vue 实例被创建时，它向 Vue 的响应式系统中加入了其 data 对象中能找到的所有的属性。
+     *
+     * 当这些属性的值发生改变时，html 视图将也会产生相应的变化
+     */
+    var vue = new Vue({
+        // 用来指定我们将要渲染数据的dom节点；需要带#
+        el: "#startId",
+        // 定义属性，dom中可以引用
+        data: {
+            site: 'http://www.runoob.com/vue2/vue-start.html',
+            name: 'Vue.js 起步 ',
+            develop: '菜鸟教程'
+        },
+        // 定义函数，dom中可调用（调用时不可带分号，可以在{{}}用，也可以在判断取值如v-if中使用）
+        methods: {
+            desc: function () {
+                return "这个名为'" + this.name + "'的网站(" + this.site + ")是由" + this.develop + "开发的";
+            },
+            log: function () {
+                alert('test')
+            }
+        }
+    });
+
+</script>
+</body>
+
+</html>
