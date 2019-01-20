@@ -11,15 +11,15 @@
     <span><h1>{{renderTitle}}</h1></span>
     <span v-html="plainText"></span>
     <span v-html="htmlText"></span>
-    <span v-text="textText"><h2>df</h2></span>
+    <span v-text="textText"><h3>df</h3></span>
 </div>
 <script type="text/javascript">
     new Vue({
         el: '#v-render',
         data: {
             renderTitle: '1、数据渲染：{{}}、v-html、v-text',
-            plainText: '<h2>1.1 {{}}：直接输出属性绑定的值</h2>',
-            htmlText: '<h2>1.2 v-html：将属性绑定的数据以html格式输出</h2>',
+            plainText: '<h3>1.1 {{}}：直接输出属性绑定的值</h3>',
+            htmlText: '<h3>1.2 v-html：将属性绑定的数据以html格式输出</h3>',
             textText: '1.3 v-text：直接把节点内的文本替换为数据定义中的文本'
         }
     });
@@ -43,8 +43,8 @@
         el: '#v-control',
         data: {
             controlTitle: '2、逻辑控制：v-if/v-else-if/v-else、v-show',
-            controlIf: '<h2>2.1 v-if：如果v-if返回false，则控制的节点不插入dom中</h2>',
-            controlShow: '<h2>2.2 v-show：如果v-show返回false，则控制的节点隐藏</h2>',
+            controlIf: '<h3>2.1 v-if：如果v-if返回false，则控制的节点不插入dom中</h3>',
+            controlShow: '<h3>2.2 v-show：如果v-show返回false，则控制的节点隐藏</h3>',
             ifOk: function () {
                 return Math.random() > 0.5;
             },
@@ -58,10 +58,17 @@
 <div id="v-for">
     <!-- 循环：v-for -->
     <span><h1>{{forTitle}}</h1></span>
+    <span v-html="forInArray"></span>
     <ol>
         <li v-for="item in goodsList">
             <span>商品名称：{{item.name}}</span>
             <span>商品件数：{{item.count}}</span>
+        </li>
+    </ol>
+    <span v-html="forInObject"></span>
+    <ol>
+        <li v-for="(value,key) in specialGoods">
+            <span>商品属性：{{key}}</span>，<span>商品值：{{value}}</span><br>
         </li>
     </ol>
 </div>
@@ -78,16 +85,15 @@
                 {id: 4, name: 'DEG', count: 1},
                 {id: 5, name: 'TTE', count: 15}
             ],
-            forTitle: '3、循环指令v-for，需以 site in sites 形式的特殊语法， sites 是源数据数组并且 site 是数组元素迭代的别名。',
+            specialGoods: {id: 10, name: '特殊商品', count: 100, opgCode: 'G88888'},
+            forTitle: '3、循环指令v-for，需使用for-in的方式进行循环',
+            forInArray: '<h3>3.1 for-in  数组，item为每次迭代的元素</h3>',
+            forInObject: '<h3>3.2 for-in  对象，item可以是每次迭代的值；也可以是(value, key)，还可以(value, key,index)' +
+                '<br>型如： v-for="(value,key) in specialGoods"' +
+                '</h3>'
         }
     })
 </script>
-<div id="v-model">
-    <!-- 表单：v-model -->
-</div>
-<div id="v-bind">
-    <!-- 数据参数绑定：v-bing -->
-</div>
 </body>
 
 </html>
