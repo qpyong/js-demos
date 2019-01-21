@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性和监听器</title>
+    <script src="../lib/vue.js"></script>
+</head>
+<body>
+<div id="computedId">
+    <h1>1、计算属性</h1>
+    <span>将表达式中复杂的业务逻辑抽取为方法，并声明为VM实例中computed属性中的方法</span>
+    <h2>简单表达式{{}}</h2>
+    <img src="../image/example_simple.png"/>
+    <p>上述的表达式{{}}中的逻辑比较复杂，又不能复用。此时就需要重构。有两种重构方法：<b>1是computed</b>，<b>1是methods</b></p>
+    <h2>使用computed（计算属性）重构</h2>
+    <img :src="example_computed_declaration"/>
+    <p>使用时，就像使用vm的属性一样使用该计算属性对应的方法(<span style="color:red">不能写括号</span>)</p>
+    <p v-html="example_computed"></p>
+    <p>测试1：</p>
+    <input type="text" v-model="message1" placeholder="请输入文本"/>
+    <p>{{computedMethod}}</p>
+    <p></p>
+    <p>测试2-千米和米的换算：</p>
+    <div>
+        <input type="text" v-model="computed_kilometers" placeholder="输入即换算">千米=
+        <input type="text" v-model="computed_meters">米
+    </div>
+    <p></p>
+    <h2>使用vm的methods（即方法）重构</h2>
+    <img src="../image/example_methods.png"/>
+    <p>重构为普通方法后，调用时需要带括号</p>
+    <p>测试：</p>
+    <input type="text" v-model="message2" placeholder="请输入文本"/>
+    <p>{{generalMethod()}}</p>
+    <p></p>
+    <h2>computed和methods的不同</h2>
+    <p>computed有缓存。即只在相关依赖发生改变时computed才会重新求值</p>
+    <p>methods每次都会计算</p>
+    <p></p>
+</div>
+<script type="text/javascript">
+    var computedVM = new Vue({
+        el: '#computedId',
+        data: {
+            message1: '',
+            message2: '',
+            computed_kilometers: '',
+            example_computed: '&lt;div id="example"&gt;<br>' +
+                '  &lt;p&gt;Original message: "{{ message }}"&lt;/p&gt;<br>' +
+                '  &lt;p&gt;Computed reversed message: "<span style="color:red">{{ reversedMessage }}</span>"&lt;/p&gt;<br>' +
+                '&lt;/div&gt;',
+            example_computed_declaration: '../image/example_computed_declaration.png'
+        },
+        computed: {
+            // 计算属性对应的方法，在调用时不能写括号
+            computedMethod: function () {
+                return this.message1.split('').reverse().join('');
+            },
+            computed_meters: function () {
+                return this.computed_kilometers * 1000;
+            }
+        },
+        methods: {
+            // 普通方法，在调用时必须写括号(当方法名作为参数传递时也不需带括号)
+            generalMethod: function () {
+                return this.message2.split('').reverse().join('');
+            }
+        }
+    })
+</script>
+<div id="watch">
+    <h1>2、监听器</h1>
+    <h2>用法</h2>
+    <ol>
+        <li>在vm中用watch属性来创建监听器</li>
+        <img src="../image/watch-field.png"/>
+        <li>调用vm实例的$watch()方法来创建监听器</li>
+        <img src="../image/watch-method.png"/>
+    </ol>
+    <p>测试watch--单位换算：</p>
+    <div>
+        <input type="text" v-model="watch_kilometers" placeholder="输入即换算">千米=
+        <input type="text" v-model="watch_meters">米
+    </div>
+    <p></p>
+    <p></p>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#watch',
+            data: {
+                watch_kilometers: '',
+                watch_meters: '',
+            },
+            watch: {
+                // 监听watch_kilometers属性的数据变化，所以这里的属性名为被监听属性名
+                // 这里的函数，可以是一个参数（新的值），也可以是两个参数（前新后旧）
+                watch_kilometers: function (newValue, oldValue) {
+                    this.watch_meters = newValue * 1000;
+                },
+                watch_meters: function (newValue) {
+                    this.watch_kilometers = newValue / 1000;
+                }
+            }
+        });
+    </script>
+</div>
+</body>
+</html>

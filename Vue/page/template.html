@@ -7,9 +7,11 @@
 </head>
 <body>
 <div id="v-render">
-    <span><h1>指令是带有 v- 前缀的特殊属性。</h1></span>
+    <h1>指令是带有 v- 前缀的特殊属性。</h1>
+    <p>指令的职责是，当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM。</p>
+    <p>指令可带参数，格式为v-xxx:param，参考v-bind，v-on等</p>
     <!-- 数据渲染：{{}}、v-html、v-text -->
-    <span><h2>{{renderTitle}}</h2></span>
+    <h2>{{renderTitle}}</h2>
     <span v-html="plainText"></span>
     <span v-html="htmlText"></span>
     <span v-text="textText"><h3>df</h3></span>

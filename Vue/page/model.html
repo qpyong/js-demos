@@ -3,8 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>v-model指令</title>
+    <script src="../lib/vue.min.js"></script>
 </head>
 <body>
+<div id="modelId">
+    <span v-html="concept"></span>
+    <p v-html="conceptDetail"></p>
+    <p>这里只介绍input和checkbox（单选和多选）的使用</p>
+    <span v-html="input"></span>
+    <div>
+        <label for="userNameId">用户名</label>
+        <input type="text" id="userNameId" v-model="username" placeholder="请输入用户名"/>
+        <label>你输入了：{{username}}</label>
+    </div>
+    <span v-html="checkbox"></span>
+    <div>
+        <label for="checkBoxId">单个checkbox，值为boolean类型：</label>
+        <input type="checkbox" id="checkBoxId" placeholder="请选择单个checkbox" v-model="singleCheckBoxValue"/>
+        <span>单个checkbox的选择结果：{{singleCheckBoxValue}}</span>
+    </div>
+    <div>
+        <label for="checkBoxBindId">对于单个checkbox，还可以指定选中的值（默认是boolean类型）：</label>
+        <input type="checkbox" id="checkBoxBindId" placeholder="请选择单个checkbox" v-model="singleCheckBoxBindValue"
+               true-value="111" false-value="222"/>
+        <span>单个checkbox的选择结果：{{singleCheckBoxBindValue}}</span>
+    </div>
+    <div>
+        <span>多个checkbox，要绑定到<b style="color:red">同一个</b>数组：</span>
+        <input type="checkbox" id="multiCheckBoxId1" value="ck1" v-model="multiCheckBoxes"/>
+        <label for="multiCheckBoxId1">ck1</label>
+        <input type="checkbox" id="multiCheckBoxId2" value="ck2" v-model="multiCheckBoxes"/>
+        <label for="multiCheckBoxId2">ck2</label>
+        <input type="checkbox" id="multiCheckBoxId3" value="ck3" v-model="multiCheckBoxes"/>
+        <label for="multiCheckBoxId3">ck3</label>
+        <span>多个checkbox的选择结果：{{multiCheckBoxes}}</span>
+    </div>
 
+</div>
+
+<script type="text/javascript">
+    new Vue({
+        el: "#modelId",
+        data: {
+            concept: '<h1>v-model</h1>',
+            conceptDetail: 'v-model 指令在表单 &lt;input&gt;、&lt;textarea&gt; 及 &lt;select&gt; 元素上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。',
+            input: '<h2>input数据绑定</h2>',
+            username: '',
+            checkbox: '<h2>checkbox数据绑定</h2>',
+            singleCheckBoxValue: 'ok',
+            singleCheckBoxBindValue: 'ok',
+            multiCheckBoxes: [],
+        }
+    });
+</script>
 </body>
 </html>
